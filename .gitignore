@@ -1,0 +1,11 @@
+/*
+
+!.gitignore
+!init.el
+!custom.el
+!LICENSE
+!README
+
+!conf.d/
+!site-lisp/
+!snippets/

@@ -1,6 +1,6 @@
 ;;; 01global.el --- global Emacs configuration
 ;;;
-;;; Time-stamp: <2024-10-21 01:15:45 azabiralov>
+;;; Time-stamp: <2025-02-27 13:33:13 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
@@ -45,7 +45,7 @@
 (column-number-mode -1)
 (desktop-save-mode -1)
 (line-number-mode -1)
-(scroll-bar-mode -1)
+(scroll-bar-mode t)
 (tool-bar-mode -1)
 (blink-cursor-mode t)
 (delete-selection-mode t)

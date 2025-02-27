@@ -1,6 +1,6 @@
 ;;; 02modes.el
 ;;;
-;;; Time-stamp: <2024-10-08 18:28:01 azabiralov>
+;;; Time-stamp: <2025-02-27 13:27:57 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
@@ -118,13 +118,6 @@
         company-keywords-ignore-case t)
 
   (global-company-mode t))
-
-(use-package yascroll
-  :demand t
-  :config
-  (setq yascroll:delay-to-hide nil
-	yascroll:scroll-bar 'right-fringe)
-  (global-yascroll-bar-mode 1))
 
 (use-package column-enforce-mode
   :diminish

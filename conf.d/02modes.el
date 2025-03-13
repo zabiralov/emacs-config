@@ -1,6 +1,6 @@
 ;;; 02modes.el
 ;;;
-;;; Time-stamp: <2025-02-27 13:27:57 azabiralov>
+;;; Time-stamp: <2025-03-11 17:33:47 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
@@ -211,33 +211,6 @@
   :config
   (diminish 'auto-revert-mode)
   (diminish 'yas-minor-mode))
-
-(use-package auto-dim-other-buffers
-  :config
-  (setq auto-dim-other-buffers-dim-on-focus-out t
-	auto-dim-other-buffers-dim-on-switch-to-minibuffer t))
-
-(auto-dim-other-buffers-mode t)
-
-(use-package vterm
-  :config
-  (setq vterm-shell "/bin/bash"
-	vterm-max-scrollback 100000
-	vterm-kill-buffer-on-exit t
-	vterm-always-compile-module t
-	vterm-min-window-width 80
-	vterm-term-environment-variable "xterm-256color"))
-
-;; (use-package vterm-toggle
-;;   :demand t
-;;   :config
-;;   (setq vterm-toggle-fullscreen-p nil
-;;         vterm-toggle-project-root t
-;;         vterm-toggle-cd-auto-create-buffer t
-;;         vterm-toggle-reset-window-configration-after-exit t)
-
-;;   :bind
-;;   ("<f11>" . vterm-toggle))
 
 
 ;;; 02modes.el ends here

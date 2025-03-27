@@ -1,6 +1,6 @@
 ;;; 05macrofunc.el --- keyboard macroses and custom functions
 ;;;
-;;; Time-stamp: <2024-10-08 20:43:32 azabiralov>
+;;; Time-stamp: <2025-03-27 02:14:03 azabiralov>
 ;;;
 ;;; Commentary:
 
@@ -178,10 +178,6 @@ With prefix ARG delete across newlines as well."
 (bind-key "<f7>" 'kill-this-buffer)
 
 (bind-key "<f9>" 'mark-whole-buffer)
-
-
-(bind-key "C-<up>" 'windmove-up)
-(bind-key "C-<down>" 'windmove-down)
 
 (bind-key "s-<SPC>" 'my-switch-language)
 (bind-key "C-z" 'undo)

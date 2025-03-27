@@ -1,6 +1,6 @@
 ;;; 01global.el --- global Emacs configuration
 ;;;
-;;; Time-stamp: <2025-02-27 13:33:13 azabiralov>
+;;; Time-stamp: <2025-03-27 02:06:33 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
@@ -51,6 +51,7 @@
 (delete-selection-mode t)
 (goto-address-mode t)
 (pixel-scroll-precision-mode t)
+(winner-mode t)
 
 
 ;; menu-bar-mode :: menu bar

@@ -1,6 +1,6 @@
 ;;; 02modes.el
 ;;;
-;;; Time-stamp: <2025-03-11 17:33:47 azabiralov>
+;;; Time-stamp: <2025-03-27 02:15:23 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
@@ -211,6 +211,13 @@
   :config
   (diminish 'auto-revert-mode)
   (diminish 'yas-minor-mode))
+
+(use-package transpose-frame
+  :bind
+  ("C-<up>" . rotate-frame)
+  ("C-<down>" . transpose-frame))
+
+
 
 
 ;;; 02modes.el ends here

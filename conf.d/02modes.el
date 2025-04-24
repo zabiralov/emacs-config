@@ -1,6 +1,6 @@
 ;;; 02modes.el
 ;;;
-;;; Time-stamp: <2025-03-27 02:15:23 azabiralov>
+;;; Time-stamp: <2025-04-24 14:50:17 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
@@ -105,18 +105,17 @@
           company-semantic
           company-capf
           company-keywords
-          company-yasnippet)
-        company-tooltip-limit 15
-        company-idle-delay 0
-        company-minimum-prefix-length 2
-        company-dabbrev-minimum-length 2
-        company-dabbrev-other-buffers nil
-        company-dabbrev-ignore-case t
-        company-dabbrev-downcase nil
-        company-dabbrev-code-other-buffers t
-        company-dabbrev-code-ignore-case t
-        company-keywords-ignore-case t)
-
+	  company-yasnippet))
+  (setq   company-tooltip-limit 15
+	  company-idle-delay 0
+	  company-minimum-prefix-length 2
+	  company-dabbrev-minimum-length 2
+	  company-dabbrev-other-buffers nil
+	  company-dabbrev-ignore-case t
+	  company-dabbrev-downcase nil
+	  company-dabbrev-code-other-buffers t
+	  company-dabbrev-code-ignore-case t
+	  company-keywords-ignore-case t)
   (global-company-mode t))
 
 (use-package column-enforce-mode
@@ -175,18 +174,20 @@
 
 (use-package transient
   :config
-  (setq transient-levels-file "~/emacs/var/transient/levels.el"
-	transient-values-file "~/emacs/var/transient/values.el"
-	transient-history-file "~/emacs/var/transient/history.el"))
+  (setq transient-levels-file (expand-file-name "var/treemacs/transient/levels.el" user-emacs-directory)
+	transient-values-file (expand-file-name "var/treemacs/transient/values.el" user-emacs-directory)
+	transient-history-file (expand-file-name "var/treemacs/transient/history.el" user-emacs-directory)))
 
-(use-package flycheck
-  :diminish
-  :config
-  (setq flycheck-display-errors-delay 0.5
-	flycheck-indication-mode 'left-fringe)
-
-  (global-flycheck-mode t))
-
+  (use-package flycheck
+    :diminish
+    :config
+    (setq flycheck-display-errors-delay 0.5
+	  flycheck-indication-mode 'left-fringe
+	  flycheck-gcc-language-standard "c17"
+	  flycheck-gcc-pedantic t
+	  flycheck-cppcheck-checks '("warning" "style" "information"))
+    (add-to-list 'flycheck-gcc-include-path "~/src/include/")
+    (global-flycheck-mode t))
 
 (use-package flycheck-mmark)
 
@@ -217,7 +218,49 @@
   ("C-<up>" . rotate-frame)
   ("C-<down>" . transpose-frame))
 
+(use-package treemacs
+  :ensure t
+  :defer t
+  :config
+  (setq treemacs-collapse-dirs 0
+	treemacs-deferred-git-apply-delay 0.5
+	treemacs-display-in-side-window t
+	treemacs-file-event-delay 2000
+	treemacs-file-follow-delay 0.2
+	treemacs-follow-after-init nil
+	treemacs-expand-after-init t
+	treemacs-hide-dot-git-directory t
+	treemacs-indentation 1
+	treemacs-indentation-string " "
+	treemacs-is-never-other-window nil
+	treemacs-missing-project-action 'remove
+	treemacs-move-files-by-mouse-dragging t
+	treemacs-move-forward-on-expand nil
+	treemacs-no-png-images t
+	treemacs-no-delete-other-windows t
+	treemacs-project-follow-cleanup nil
+	treemacs-persist-file (expand-file-name "var/treemacs/persist" user-emacs-directory)
+	treemacs-position 'left
+	treemacs-read-string-input 'from-child-frame
+	treemacs-litter-directories nil
+	treemacs-project-follow-into-home t
+	treemacs-show-cursor nil
+	treemacs-show-hidden-files nil
+	treemacs-silent-filewatch t
+	treemacs-silent-refresh t
+	treemacs-sorting 'alphabetic-numeric-asc
+	treemacs-select-when-already-in-treemacs 'move-back
+	treemacs-space-between-root-nodes t
+	treemacs-tag-follow-cleanup t
+	treemacs-tag-follow-delay 1.5
+	treemacs-text-scale -1
+	treemacs-wide-toggle-width 70
+	treemacs-width 40
+	treemacs-width-increment 1
+	treemacs-width-is-initially-locked t
+	treemacs-workspace-switch-cleanup nil)
 
+  :hook (after-init . treemacs))
 
 
 ;;; 02modes.el ends here

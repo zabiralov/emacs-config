@@ -1,6 +1,6 @@
 ;;; 02modes.el
 ;;;
-;;; Time-stamp: <2025-04-24 14:50:17 azabiralov>
+;;; Time-stamp: <2025-04-28 00:01:31 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
@@ -254,8 +254,8 @@
 	treemacs-tag-follow-cleanup t
 	treemacs-tag-follow-delay 1.5
 	treemacs-text-scale -1
-	treemacs-wide-toggle-width 70
-	treemacs-width 40
+	treemacs-wide-toggle-width 50
+	treemacs-width 30
 	treemacs-width-increment 1
 	treemacs-width-is-initially-locked t
 	treemacs-workspace-switch-cleanup nil)

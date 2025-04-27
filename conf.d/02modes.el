@@ -1,6 +1,6 @@
 ;;; 02modes.el
 ;;;
-;;; Time-stamp: <2025-04-28 00:01:31 azabiralov>
+;;; Time-stamp: <2025-04-28 00:51:32 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
@@ -220,7 +220,6 @@
 
 (use-package treemacs
   :ensure t
-  :defer t
   :config
   (setq treemacs-collapse-dirs 0
 	treemacs-deferred-git-apply-delay 0.5
@@ -253,7 +252,6 @@
 	treemacs-space-between-root-nodes t
 	treemacs-tag-follow-cleanup t
 	treemacs-tag-follow-delay 1.5
-	treemacs-text-scale -1
 	treemacs-wide-toggle-width 50
 	treemacs-width 30
 	treemacs-width-increment 1
@@ -261,6 +259,16 @@
 	treemacs-workspace-switch-cleanup nil)
 
   :hook (after-init . treemacs))
+
+
+(use-package minimap
+  :ensure t
+  :config
+  (setq minimap-window-location 'right
+	minimap-minimum-width 20
+	minimap-buffer-name "*minimap*"
+	minimap-hide-scroll-bar t))
+
 
 
 ;;; 02modes.el ends here

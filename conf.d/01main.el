@@ -1,6 +1,6 @@
 ;;; 01global.el --- global Emacs configuration
 ;;;
-;;; Time-stamp: <2025-03-27 02:06:33 azabiralov>
+;;; Time-stamp: <2025-05-01 16:04:19 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
@@ -19,8 +19,7 @@
       x-stretch-cursor t
       visible-bell nil
       ring-bell-function 'ignore
-      kill-ring-max 100
-      initial-major-mode 'text-mode
+      kill-ring-max 3
       initial-scratch-message nil
       use-file-dialog nil
       split-height-threshold nil

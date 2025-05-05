@@ -1,6 +1,6 @@
 ;;; 02modes.el
 ;;;
-;;; Time-stamp: <2025-04-28 00:51:32 azabiralov>
+;;; Time-stamp: <2025-05-05 15:38:08 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
@@ -10,9 +10,9 @@
 (use-package move-dup
   :demand t
   :bind (("M-p"   . move-dup-move-lines-up)
-         ("C-M-p" . move-dup-duplicate-up)
-         ("M-n"   . move-dup-move-lines-down)
-         ("C-M-n" . move-dup-duplicate-down)))
+	 ("C-M-p" . move-dup-duplicate-up)
+	 ("M-n"   . move-dup-move-lines-down)
+	 ("C-M-n" . move-dup-duplicate-down)))
 
 (use-package multiple-cursors
   :config
@@ -68,7 +68,7 @@
   (grugru-define-global 'symbol '("ON" "OFF"))
   (grugru-define-global 'symbol '("1" "0"))
   :bind
-  ("S-<SPC>" . grugru))
+  ("H-<SPC>" . grugru))
 
 (use-package ws-butler
   :diminish
@@ -215,8 +215,8 @@
 
 (use-package transpose-frame
   :bind
-  ("C-<up>" . rotate-frame)
-  ("C-<down>" . transpose-frame))
+  ("H-<up>" . rotate-frame)
+  ("H-<down>" . transpose-frame))
 
 (use-package treemacs
   :ensure t
@@ -225,11 +225,11 @@
 	treemacs-deferred-git-apply-delay 0.5
 	treemacs-display-in-side-window t
 	treemacs-file-event-delay 2000
-	treemacs-file-follow-delay 0.2
+	treemacs-file-follow-delay 0.1
 	treemacs-follow-after-init nil
 	treemacs-expand-after-init t
 	treemacs-hide-dot-git-directory t
-	treemacs-indentation 1
+	treemacs-indentation '(10 px)
 	treemacs-indentation-string " "
 	treemacs-is-never-other-window nil
 	treemacs-missing-project-action 'remove
@@ -249,7 +249,7 @@
 	treemacs-silent-refresh t
 	treemacs-sorting 'alphabetic-numeric-asc
 	treemacs-select-when-already-in-treemacs 'move-back
-	treemacs-space-between-root-nodes t
+	treemacs-space-between-root-nodes nil
 	treemacs-tag-follow-cleanup t
 	treemacs-tag-follow-delay 1.5
 	treemacs-wide-toggle-width 50
@@ -257,17 +257,101 @@
 	treemacs-width-increment 1
 	treemacs-width-is-initially-locked t
 	treemacs-workspace-switch-cleanup nil)
-
+  (treemacs-follow-mode -1)
+  (treemacs-git-mode -1)
+  :bind
+  ("H-y" . treemacs)
   :hook (after-init . treemacs))
 
-
 (use-package minimap
-  :ensure t
+  :defer t
   :config
   (setq minimap-window-location 'right
 	minimap-minimum-width 20
 	minimap-buffer-name "*minimap*"
-	minimap-hide-scroll-bar t))
+	minimap-hide-scroll-bar t)
+  :bind ("H-m" . minimap-mode))
+
+(use-package vterm
+  :config
+  (setq vterm-always-compile-module t
+	vterm-max-scrollback 100000
+	vterm-min-window-width 40
+	vterm-kill-buffer-on-exit t))
+
+(use-package vterm-toggle
+  :config
+  (setq vterm-toggle-scope 'dedicated
+	vterm-toggle-hide-method 'delete-window
+	vterm-toggle-reset-window-configration-after-exit t)
+  :bind ("H-t" . vterm-toggle)
+  :hook
+  (vterm-toggle-show . goto-address-mode))
+
+(use-package winner
+  :defer t
+  :config
+  (setq winner-ring-size 100)
+  :bind ("H-z" . winner-undo))
+
+(use-package bufferbin
+  :defer t
+  :config
+  (setq bufferbin-window-width 30
+	bufferbin-direction 'right
+	bufferbin-buffer-name "*bufferbin*"
+	bufferbin-header nil)
+  :bind ("H-b" . bufferbin))
+
+(use-package bufferfile
+  :defer t
+  :config
+  (setq bufferfile-use-vc t)
+  :bind
+  ("H-r" . bufferfile-rename)
+  ("H-<delete>" . bufferfile-delete))
+
+(use-package buffer-flip
+  :defer t
+  :config
+  (setq buffer-flip-skip-patterns '("^\\*.+\\*\\b"))
+  :bind
+  (("M-<tab>" . buffer-flip)
+   :map buffer-flip-map
+   ( "M-<tab>" .   buffer-flip-forward)
+   ( "M-S-<tab>" . buffer-flip-backward)
+   ( "M-ESC" .     buffer-flip-abort)))
+
+(use-package autoscratch
+  :defer t
+  :config
+  (setq initial-major-mode 'autoscratch-mode
+	autoscratch-reset-default-directory t)
+  (setq autoscratch-triggers-alist
+	'(("[(;]"         . (emacs-lisp-mode))
+	  ("#"            . (autoscratch-select
+			     '(("perl"   . (cperl-mode))
+			       ("ruby"   . (ruby-mode))
+			       ("conf"   . (conf-unix-mode))
+			       ("shell"  . (shell-script-mode)))))
+	  ("[-a-zA-Z0-9]" . (text-mode))
+	  ("/"            . (c-mode))
+	  ("."            . (fundamental-mode)))))
+
+(use-package buffer-move
+  :defer t
+  :config
+  (setq buffer-move-stay-after-swap t)
+  :bind
+  ("H-<up>" . buf-move-up)
+  ("H-<down>" . buf-move-down)
+  ("H-<left>" . buf-move-left)
+  ("H-<right>" . buf-move-right))
+
+(use-package dedicated
+  :bind
+  ("H-`" . dedicated-mode)
+  ("C-x d" . dedicated-mode))
 
 
 

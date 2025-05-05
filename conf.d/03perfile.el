@@ -1,6 +1,6 @@
 ;;; 10editmodes.el --- customizations for various modes
 ;;;
-;;; Time-stamp: <2025-04-24 14:40:05 azabiralov>
+;;; Time-stamp: <2025-05-02 16:14:41 azabiralov>
 ;;;
 ;;; Commentary:
 
@@ -81,8 +81,10 @@
   :defer t
   :mode "\\.tpl\\'"
   :mode "\\.hcl\\'"
+  :mode "\\.vars\\'"
+  :mode "\\.nomad\\'"
   :config
-  (setq hcl-indent-level 4))
+  (setq hcl-indent-level 2))
 
 (use-package nginx-mode
   :defer t

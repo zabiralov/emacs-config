@@ -1,10 +1,33 @@
-;;; 05macrofunc.el --- keyboard macroses and custom functions
+;;; 04macrofunc.el --- keyboard macroses and custom functions
 ;;;
-;;; Time-stamp: <2025-05-05 14:50:41 azabiralov>
+;;; Time-stamp: <2025-05-23 15:59:55 azabiralov>
 ;;;
 ;;; Commentary:
 
 ;;; Code:
+
+(defun my-buffer-enabled-text-modes ()
+  "List of buffer-local modes enabled by default for text modes."
+  (interactive)
+  (auto-insert-mode t)
+  (goto-address-mode t)
+  (rainbow-delimiters-mode t)
+  (prettify-symbols-mode t)
+  (highlight-symbol-mode t))
+
+(defun my-buffer-enabled-prog-modes ()
+  "List of buffer-local modes enabled by default for text modes."
+  (interactive)
+  (auto-insert-mode t)
+  (goto-address-mode t)
+  (rainbow-delimiters-mode t)
+  (prettify-symbols-mode t)
+  (highlight-symbol-mode t)
+  (indent-tabs-mode t)
+  (aggressive-indent-mode t))
+
+(add-hook 'text-mode-hook 'my-buffer-enabled-text-modes)
+(add-hook 'prog-mode-hook 'my-buffer-enabled-prog-modes)
 
 (defun my-recreate-scratch nil
   "Recreate a scratch buffer."
@@ -53,6 +76,7 @@
 (bind-key "H-v" 'yank)
 (bind-key "H-d" 'duplicate-line)
 (bind-key "H-c" 'keyboard-quit)
+(bind-key "H-c" 'abort-recursive-edit minibuffer-local-map)
 (bind-key "H-f" 'find-file)
 (bind-key "H-s" 'save-buffer)
 (bind-key "H-x" 'eval-last-sexp)
@@ -65,8 +89,8 @@
 
 (bind-key "<f4>" 'my-delete-whole-line)
 
-;; (bind-key "<f5>" ')
-;; (bind-key "<f6>" ')
+(bind-key "<f5>" 'indent-tabs-mode)
+(bind-key "<f6>" 'aggressive-indent-mode)
 ;; (bind-key "<f7>" ')
 ;; (bind-key "<f8>" ')
 ;; (bind-key "<f9>" ')

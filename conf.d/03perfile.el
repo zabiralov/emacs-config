@@ -1,13 +1,11 @@
 ;;; 10editmodes.el --- customizations for various modes
 ;;;
-;;; Time-stamp: <2025-05-02 16:14:41 azabiralov>
+;;; Time-stamp: <2025-05-06 11:38:22 azabiralov>
 ;;;
 ;;; Commentary:
 
 ;;; Code:
 
-
-(require 'flycheck)
 
 (use-package make-mode
   :defer t
@@ -40,8 +38,6 @@
 	c-default-style "bsd"
 	c-report-syntactic-errors t))
 
-
-
 (use-package toml-mode :defer t)
 (use-package json-mode :defer t)
 (use-package dockerfile-mode :defer t)
@@ -60,8 +56,7 @@
   :defer t
   :mode "\\.tf\\'"
   :config
-  (setq terraform-indent-level 4))
-
+  (setq terraform-indent-level 2))
 
 (use-package conf-mode
   :defer t
@@ -89,7 +84,7 @@
 (use-package nginx-mode
   :defer t
   :config
-  (setq nginx-indent-level 4
+  (setq nginx-indent-level 2
 	nginx-indent-tabs-mode nil))
 
 (use-package go-mode
@@ -97,6 +92,11 @@
   :config
   (setq go-fontify-function-calls t
 	go-fontify-variables t))
+
+(use-package nasm-mode
+  :defer t
+  :config
+  (setq nasm-basic-offset 2))
 
 
 ;;; 03perfile.el ends here

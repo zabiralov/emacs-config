@@ -1,18 +1,22 @@
 ;;; 02modes.el
 ;;;
-;;; Time-stamp: <2025-05-05 15:38:08 azabiralov>
+;;; Time-stamp: <2025-05-23 16:12:06 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
 ;;; Code:
 
+(use-package dedicated
+  :bind (("H-`" . dedicated-mode)
+	 ("C-x d" . dedicated-mode)
+	 ("<f10>" . dedicated-mode)))
 
 (use-package move-dup
-  :demand t
-  :bind (("M-p"   . move-dup-move-lines-up)
-	 ("C-M-p" . move-dup-duplicate-up)
-	 ("M-n"   . move-dup-move-lines-down)
-	 ("C-M-n" . move-dup-duplicate-down)))
+:demand t
+:bind (("M-p"   . move-dup-move-lines-up)
+       ("C-M-p" . move-dup-duplicate-up)
+       ("M-n"   . move-dup-move-lines-down)
+       ("C-M-n" . move-dup-duplicate-down)))
 
 (use-package multiple-cursors
   :config
@@ -27,12 +31,10 @@
         epa-popup-info-window nil))
 
 (use-package aggressive-indent
-  :diminish
+  :diminish "A-IND"
   :config
   (setq aggressive-indent-comments-too t
-        aggressive-indent-sit-for-time 0.01)
-
-  (global-aggressive-indent-mode t))
+	aggressive-indent-sit-for-time 0.01))
 
 (use-package smartparens
   :diminish
@@ -261,6 +263,36 @@
   (treemacs-git-mode -1)
   :bind
   ("H-y" . treemacs)
+  :custom-face
+  (treemacs-directory-face ((t (:font "Cantarell 11"))))
+  (treemacs-directory-collapsed-face ((t ( :font "Cantarell 11"))))
+  (treemacs-window-background-face ((t ( :font "Cantarell 11"))))
+  (treemacs-hl-line-face ((t ( :font "Cantarell 11"))))
+  (treemacs-file-face ((t ( :font "Cantarell 11"))))
+  (treemacs-root-face ((t ( :font "Cantarell 11"))))
+  (treemacs-root-unreadable-face ((t ( :font "Cantarell 11"))))
+  (treemacs-root-remote-face ((t ( :font "Cantarell 11"))))
+  (treemacs-root-remote-unreadable-face ((t ( :font "Cantarell 11"))))
+  (treemacs-root-remote-disconnected-face ((t ( :font "Cantarell 11"))))
+  (treemacs-term-node-face ((t ( :font "Cantarell 11"))))
+  (treemacs-git-unmodified-face ((t ( :font "Cantarell 11"))))
+  (treemacs-git-modified-face ((t ( :font "Cantarell 11"))))
+  (treemacs-git-renamed-face ((t ( :font "Cantarell 11"))))
+  (treemacs-git-ignored-face ((t ( :font "Cantarell 11"))))
+  (treemacs-git-untracked-face ((t ( :font "Cantarell 11"))))
+  (treemacs-git-added-face ((t ( :font "Cantarell 11"))))
+  (treemacs-git-conflict-face ((t ( :font "Cantarell 11"))))
+  (treemacs-tags-face ((t ( :font "Cantarell 11"))))
+  (treemacs-help-title-face ((t ( :font "Cantarell 11"))))
+  (treemacs-help-column-face ((t ( :font "Cantarell 11"))))
+  (treemacs-on-failure-pulse-face ((t ( :font "Cantarell 11"))))
+  (treemacs-on-success-pulse-face ((t ( :font "Cantarell 11"))))
+  (treemacs-fringe-indicator-face ((t ( :font "Cantarell 11"))))
+  (treemacs-header-button-face ((t ( :font "Cantarell 11"))))
+  (treemacs-peek-mode-indicator-face ((t ( :font "Cantarell 11"))))
+  (treemacs-marked-file-face ((t ( :font "Cantarell 11"))))
+  (treemacs-git-commit-diff-face ((t ( :font "Cantarell 11"))))
+  (treemacs-async-loading-face ((t ( :font "Cantarell 11"))))
   :hook (after-init . treemacs))
 
 (use-package minimap
@@ -339,20 +371,27 @@
 	  ("."            . (fundamental-mode)))))
 
 (use-package buffer-move
+:defer t
+:config
+(setq buffer-move-stay-after-swap t)
+:bind
+(("H-<up>" . buf-move-up)
+ ("H-<down>" . buf-move-down)
+ ("H-<left>" . buf-move-left)
+ ("H-<right>" . buf-move-right)))
+
+(use-package dumb-jump
   :defer t
   :config
-  (setq buffer-move-stay-after-swap t)
-  :bind
-  ("H-<up>" . buf-move-up)
-  ("H-<down>" . buf-move-down)
-  ("H-<left>" . buf-move-left)
-  ("H-<right>" . buf-move-right))
+  (setq dumb-jump-window 'current))
 
-(use-package dedicated
-  :bind
-  ("H-`" . dedicated-mode)
-  ("C-x d" . dedicated-mode))
-
-
+(use-package magit
+  :defer t
+  :config
+  (setq git-commit-major-mode 'log-edit-mode
+	git-commit-summary-max-length 72
+	git-commit-cd-to-toplevel t
+	magit-delete-by-moving-to-trash nil
+	magit-slow-confirm nil))
 
 ;;; 02modes.el ends here

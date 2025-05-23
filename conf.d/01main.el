@@ -1,6 +1,6 @@
 ;;; 01global.el --- global Emacs configuration
 ;;;
-;;; Time-stamp: <2025-05-01 16:04:19 azabiralov>
+;;; Time-stamp: <2025-05-23 17:48:50 azabiralov>
 ;;;
 ;;; Commentary:
 ;;
@@ -51,6 +51,7 @@
 (goto-address-mode t)
 (pixel-scroll-precision-mode t)
 (winner-mode t)
+(global-tab-line-mode t)
 
 
 ;; menu-bar-mode :: menu bar
@@ -60,7 +61,7 @@
       buffers-menu-max-size 20
       buffers-menu-buffer-name-length 20
       buffers-menu-show-status t)
-(menu-bar-mode t)
+(menu-bar-mode -1)
 
 
 ;; default new buffer settings
@@ -68,8 +69,7 @@
 (setq-default cursor-type 'bar
               tab-width 8
               fill-column 80
-              major-mode 'text-mode
-              indent-tabs-mode t
+	      major-mode 'text-mode
               mode-line-format
               (list "%+ " "%4l %4c " "%6p " "%b " "%f " "%e" mode-line-modes))
 
@@ -80,21 +80,6 @@
 
 ;; Update timestamp with file saving
 (add-hook 'before-save-hook 'time-stamp)
-
-;; List of modes which should be enabled for buffer locally.
-(defun my-buffer-enabled-modes ()
-  "List of buffer-local modes enabled by default."
-  (interactive)
-  (auto-insert-mode t)
-  (goto-address-mode t)
-  (rainbow-delimiters-mode t)
-  (prettify-symbols-mode t)
-  (highlight-symbol-mode t)
-  (hl-line-mode t))
-
-
-(add-hook 'prog-mode-hook 'my-buffer-enabled-modes)
-(add-hook 'text-mode-hook 'my-buffer-enabled-modes)
 
 
 ;; human languages support
@@ -107,10 +92,13 @@
 ;; https://github.com/a13/reverse-im.el
 ;;
 (use-package reverse-im
+  :ensure t
   :config
   (add-to-list 'reverse-im-input-methods "russian-computer")
   (reverse-im-mode t))
 
 
+(use-package current-window-only
+  :ensure t)
 
 ;;; 01main.el ends here
